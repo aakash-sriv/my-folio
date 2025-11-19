@@ -31,13 +31,13 @@ export default function Experience() {
   return (
     <section id="experience" className="min-h-screen py-4 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             Experience & Education
           </h2>
-          <div className="w-20 h-1 bg-[linear-gradient(135deg,#f97316,#ec4899)] mx-auto rounded-full"></div>
+          <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full"></div>
           <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">
             My professional journey and academic background
           </p>
@@ -46,47 +46,45 @@ export default function Experience() {
         {/* Timeline */}
         <div className="relative max-w-5xl mx-auto">
           {/* Vertical line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-[linear-gradient(180deg,#f97316,#ec4899)] transform md:-translate-x-1/2"></div>
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 accent-gradient dark:accent-gradient-dark transform md:-translate-x-1/2"></div>
 
           {/* Timeline items */}
           <div className="space-y-12">
             {timeline.map((item, idx) => {
               const Icon = item.icon;
               const isLeft = idx % 2 === 0; // Alternate sides on desktop
-              
+
               return (
-                <div 
-                  key={idx} 
-                  className={`relative flex items-start gap-6 md:gap-0 ${
-                    isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
+                <div
+                  key={idx}
+                  className={`relative flex items-start gap-6 md:gap-0 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+                    }`}
                 >
-                  
+
                   {/* Content card - takes half width on desktop */}
                   <div className={`flex-1 md:w-5/12 ${isLeft ? 'md:pr-12' : 'md:pl-12'}`}>
                     <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-800 hover:shadow-xl transition-all group">
-                      
+
                       {/* Year badge */}
                       <div className="flex items-center gap-3 mb-3">
-                        <span className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-sm font-semibold rounded-full">
+                        <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-sm font-semibold rounded-full">
                           {item.year}
                         </span>
-                        <span className={`text-xs font-medium px-2 py-1 rounded ${
-                          item.type === 'work' 
+                        <span className={`text-xs font-medium px-2 py-1 rounded ${item.type === 'work'
                             ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
                             : 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
-                        }`}>
+                          }`}>
                           {item.type === 'work' ? 'Work' : 'Education'}
                         </span>
                       </div>
 
                       {/* Title */}
-                      <h4 className="text-xl font-bold text-black dark:text-white mb-2 group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
+                      <h4 className="text-xl font-bold text-black dark:text-white mb-2 group-hover:text-[#79b072] dark:group-hover:text-[#0a8a3f] transition-colors">
                         {item.title}
                       </h4>
 
                       {/* Company */}
-                      <p className="text-orange-500 dark:text-orange-400 font-medium mb-3">
+                      <p className="text-[#79b072] dark:text-[#0a8a3f] font-medium mb-3">
                         {item.company}
                       </p>
 
@@ -99,7 +97,7 @@ export default function Experience() {
 
                   {/* Center icon - positioned in middle on desktop */}
                   <div className="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 shrink-0">
-                    <div className="w-16 h-16 rounded-full bg-[linear-gradient(135deg,#f97316,#ec4899)] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform z-10">
+                    <div className="w-16 h-16 rounded-full accent-gradient dark:accent-gradient-dark flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform z-10">
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                   </div>

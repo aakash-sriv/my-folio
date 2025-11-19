@@ -56,13 +56,13 @@ export default function Contact() {
 
   const handleSubmit = () => {
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
       setFormData({ name: '', email: '', subject: '', message: '' });
-      
+
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitted(false), 5000);
     }, 1500);
@@ -71,23 +71,23 @@ export default function Contact() {
   return (
     <section id="contact" className="min-h-screen py-4 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             Get In Touch
           </h2>
-          <div className="w-20 h-1 bg-[linear-gradient(135deg,#f97316,#ec4899)] mx-auto rounded-full mb-6"></div>
+          <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full mb-6"></div>
           <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
             Have a project in mind or just want to chat? Feel free to reach out. I'm always open to discussing new opportunities and ideas!
           </p>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
-          
+
           {/* Left Side - Contact Info */}
           <div className="lg:col-span-2 space-y-8">
-            
+
             {/* Contact Cards */}
             <div className="space-y-4">
               {contactInfo.map((info, idx) => {
@@ -95,10 +95,10 @@ export default function Contact() {
                 return (
                   <div
                     key={idx}
-                    className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-orange-500 dark:hover:border-pink-500 transition-all duration-300"
+                    className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-[#79b072] dark:hover:border-[#0a8a3f] transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-full bg-linear-to-br from-orange-500 to-pink-500 flex items-center justify-center shrink-0">
+                      <div className="w-12 h-12 rounded-full accent-gradient dark:accent-gradient-dark flex items-center justify-center shrink-0">
                         <Icon size={20} className="text-white" />
                       </div>
                       <div className="flex-1">
@@ -108,7 +108,7 @@ export default function Contact() {
                         {info.link ? (
                           <a
                             href={info.link}
-                            className="text-base font-medium text-black dark:text-white hover:text-orange-500 dark:hover:text-pink-400 transition-colors break-all"
+                            className="text-base font-medium text-black dark:text-white hover:text-[#79b072] dark:hover:text-[#0a8a3f] transition-colors break-all"
                           >
                             {info.value}
                           </a>
@@ -149,7 +149,7 @@ export default function Contact() {
             </div>
 
             {/* Quick Note */}
-            <div className="bg-linear-to-br from-orange-50 to-pink-50 dark:from-gray-900 dark:to-gray-900 rounded-xl p-6 border border-orange-200 dark:border-gray-800">
+            <div className="bg-green-50 dark:bg-green-900/30 rounded-xl p-6 border border-green-200 dark:border-gray-800">
               <p className="text-sm text-gray-700 dark:text-gray-300 italic">
                 "I usually respond within 24 hours. Looking forward to hearing from you!"
               </p>
@@ -160,7 +160,7 @@ export default function Contact() {
           {/* Right Side - Contact Form */}
           <div className="lg:col-span-3">
             <div className="bg-white dark:bg-gray-900 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-gray-800">
-              
+
               {/* Success Message */}
               {submitted && (
                 <div className="mb-6 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg flex items-center gap-3">
@@ -172,7 +172,7 @@ export default function Contact() {
               )}
 
               <div className="space-y-6">
-                
+
                 {/* Name & Email Row */}
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
@@ -185,11 +185,11 @@ export default function Contact() {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-pink-500 text-black dark:text-white transition-all"
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#79b072] dark:focus:ring-[#0a8a3f] text-black dark:text-white transition-all"
                       placeholder="John Doe"
                     />
                   </div>
-                  
+
                   <div>
                     <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                       Your Email
@@ -200,7 +200,7 @@ export default function Contact() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-pink-500 text-black dark:text-white transition-all"
+                      className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#79b072] dark:focus:ring-[#0a8a3f] text-black dark:text-white transition-all"
                       placeholder="john@example.com"
                     />
                   </div>
@@ -217,7 +217,7 @@ export default function Contact() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-pink-500 text-black dark:text-white transition-all"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#79b072] dark:focus:ring-[#0a8a3f] text-black dark:text-white transition-all"
                     placeholder="Project Collaboration"
                   />
                 </div>
@@ -233,7 +233,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     rows="6"
-                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 dark:focus:ring-pink-500 text-black dark:text-white transition-all resize-none"
+                    className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#79b072] dark:focus:ring-[#0a8a3f] text-black dark:text-white transition-all resize-none"
                     placeholder="Tell me about your project or just say hi..."
                   />
                 </div>
@@ -242,7 +242,7 @@ export default function Contact() {
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto px-8 py-3 bg-[linear-gradient(135deg,#f97316,#ec4899)] text-white font-semibold rounded-lg hover:opacity-90 disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="w-full sm:w-auto px-8 py-3 accent-gradient dark:accent-gradient-dark text-white font-semibold rounded-lg hover:opacity-90 disabled:opacity-50 transition-all duration-300 flex items-center justify-center gap-2"
                 >
                   {isSubmitting ? (
                     <>

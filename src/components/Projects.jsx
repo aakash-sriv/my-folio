@@ -37,13 +37,13 @@ export default function Projects() {
   return (
     <section id="projects" className="min-h-screen py-2 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        
+
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             Featured Projects
           </h2>
-          <div className="w-20 h-1 bg-[linear-gradient(135deg,#f97316,#ec4899)] mx-auto rounded-full mb-6"></div>
+          <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full mb-6"></div>
           <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
             A collection of projects showcasing my skills in web development, problem-solving, and creative design.
           </p>
@@ -59,15 +59,15 @@ export default function Projects() {
             >
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
-                <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                
+
                 {/* Featured Badge */}
                 {project.featured && (
-                  <div className="absolute top-3 right-3 flex items-center gap-1 bg-[linear-gradient(135deg,#f97316,#ec4899)] text-white px-3 py-1 rounded-full text-xs font-semibold">
+                  <div className="absolute top-3 right-3 flex items-center gap-1 accent-gradient dark:accent-gradient-dark text-white px-3 py-1 rounded-full text-xs font-semibold">
                     <Sparkles size={12} />
                     Featured
                   </div>
@@ -80,7 +80,7 @@ export default function Projects() {
               {/* Project Info */}
               <div className="p-6">
                 {/* Title */}
-                <h3 className="text-xl font-bold text-black dark:text-white mb-2 group-hover:text-orange-500 dark:group-hover:text-pink-400 transition-colors">
+                <h3 className="text-xl font-bold text-black dark:text-white mb-2 group-hover:text-[#79b072] dark:group-hover:text-[#0a8a3f] transition-colors">
                   {project.title}
                 </h3>
 
@@ -92,7 +92,7 @@ export default function Projects() {
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, i) => (
-                    <span 
+                    <span
                       key={i}
                       className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full"
                     >
@@ -116,7 +116,7 @@ export default function Projects() {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-[linear-gradient(135deg,#f97316,#ec4899)] text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-medium"
+                    className="flex items-center gap-2 px-4 py-2 accent-gradient dark:accent-gradient-dark text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-medium"
                   >
                     <ExternalLink size={16} />
                     Live Demo
