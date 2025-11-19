@@ -1,0 +1,200 @@
+/* src/index.css */
+@import "tailwindcss";
+
+/* map dark utilities to .dark anywhere above (v4 CSS-first) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------- Base / typographic settings ---------- */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+
+  /* Global theme variables (light defaults) */
+  --bg: 255 255 255;       /* white */
+  --text: 0 0 0;           /* black text on light */
+  --muted: 100 116 139;
+  --surface: 255 255 255;
+  --border: 226 232 240;
+  --glass: 255 255 255;    /* UI chrome */
+}
+
+/* Dark overrides */
+.dark {
+  --bg: 0 0 0;           /* pure black */
+  --text: 255 255 255;   /* pure white */
+  --muted: 148 163 184;
+  --surface: 0 0 0;
+  --border: 15 15 15;
+  --glass: 0 0 0;
+}
+
+/* Apply variables site-wide */
+html, body, #root { height: 100%; }
+
+/* -------------------- Background: shimmer + circuit (light & dark) --------------------
+   The shimmer layer is first (on top), then the circuit-board pattern layers beneath.
+   Animation moves the shimmer diagonally. Reduced-motion users won't see animation.
+------------------------------------------------------------------------------------- */
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  /* ---------------- SHIMMER LAYER (top) ----------------
+     subtle diagonal sheen — tuned for light mode
+  ------------------------------------------------------ */
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(255,255,255,0.06) 0%,
+      rgba(255,255,255,0.12) 30%,
+      rgba(255,255,255,0.06) 60%,
+      rgba(255,255,255,0.02) 100%
+    ),
+
+    /* -------------- CIRCUIT BOARD PATTERN (beneath) - LIGHT -------------- */
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 19px,
+      rgba(75,85,99,0.08) 19px,
+      rgba(75,85,99,0.08) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(75,85,99,0.08) 39px,
+      rgba(75,85,99,0.08) 40px
+    ),
+    repeating-linear-gradient(90deg,
+      transparent,
+      transparent 19px,
+      rgba(75,85,99,0.08) 19px,
+      rgba(75,85,99,0.08) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(75,85,99,0.08) 39px,
+      rgba(75,85,99,0.08) 40px
+    ),
+    radial-gradient(circle at 20px 20px, rgba(55,65,81,0.12) 2px, transparent 2px),
+    radial-gradient(circle at 40px 40px, rgba(55,65,81,0.12) 2px, transparent 2px);
+
+  /* sizing/order: shimmer (first) uses large size to sweep, circuit uses 40px grid */
+  background-size:
+    320% 320%,   /* shimmer: large so the sheen sweeps across */
+    40px 40px,
+    40px 40px,
+    40px 40px,
+    40px 40px;
+
+  background-repeat: no-repeat, repeat, repeat, repeat, repeat;
+  background-position: -100% -50%, 0 0, 0 0, 0 0, 0 0;
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
+
+  /* fallback color (keeps theme variables) */
+  background-color: rgb(var(--bg));
+  color: rgb(var(--text));
+  transition: background-color .18s ease, color .18s ease;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* ---------------- Dark mode: green-tinted circuit + cooler shimmer ---------------- */
+html.dark body {
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(255,255,255,0.02) 0%,
+      rgba(16,185,129,0.06) 30%,
+      rgba(255,255,255,0.02) 60%,
+      rgba(255,255,255,0.01) 100%
+    ),
+
+    /* dark circuit */
+    repeating-linear-gradient(0deg,
+      transparent,
+      transparent 19px,
+      rgba(34,197,94,0.15) 19px,
+      rgba(34,197,94,0.15) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(34,197,94,0.15) 39px,
+      rgba(34,197,94,0.15) 40px
+    ),
+    repeating-linear-gradient(90deg,
+      transparent,
+      transparent 19px,
+      rgba(34,197,94,0.15) 19px,
+      rgba(34,197,94,0.15) 20px,
+      transparent 20px,
+      transparent 39px,
+      rgba(34,197,94,0.15) 39px,
+      rgba(34,197,94,0.15) 40px
+    ),
+    radial-gradient(circle at 20px 20px, rgba(16,185,129,0.18) 2px, transparent 2px),
+    radial-gradient(circle at 40px 40px, rgba(16,185,129,0.18) 2px, transparent 2px);
+
+  background-size:
+    320% 320%,
+    40px 40px,
+    40px 40px,
+    40px 40px,
+    40px 40px;
+
+  background-repeat: no-repeat, repeat, repeat, repeat, repeat;
+  background-position: -100% -50%, 0 0, 0 0, 0 0, 0 0;
+  background-attachment: fixed, fixed, fixed, fixed, fixed;
+
+  background-color: rgb(var(--bg));
+}
+
+/* ---------------- Shimmer animation (diagonal sweep) ---------------- */
+@keyframes shimmer-sweep {
+  0% { background-position: -120% -50%, 0 0, 0 0, 0 0, 0 0; }
+  50% { background-position: 50% 50%, 0 0, 0 0, 0 0, 0 0; }
+  100% { background-position: 220% 150%, 0 0, 0 0, 0 0, 0 0; }
+}
+
+/* apply animation to the shimmer layer only (first layer) */
+body {
+  animation: shimmer-sweep 5s linear infinite;
+}
+
+/* reduce motion respect */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+}
+
+/* util classes */
+/* Light mode gradient */
+.accent-gradient {
+  background-image: linear-gradient(135deg, #0ea15e, #9be7c4);
+}
+
+/* Dark mode gradient */
+.dark .accent-gradient-dark {
+  background-image: linear-gradient(135deg, #4361ee, #7209b7);
+}
+
+
+/* swap sun/moon icons by CSS (toggle handled by .dark on <html>) */
+.icon-sun { display:inline-block; }
+.icon-moon { display:none; }
+:where(.dark, .dark *) .icon-sun { display:none; }
+:where(.dark, .dark *) .icon-moon { display:inline-block; }
+
+/* small helpers */
+.section-offset { scroll-margin-top: 4rem; }
+
+section {
+  scroll-margin-top: 6rem;
+}
+
+/* Rotating text fade animation */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes shine { 0% { left:-150%; } 60% { left:150%; } 100% { left:150%; } }
+
+.animate-fadeIn { animation: fadeIn 0.6s ease-in-out; }
