@@ -40,6 +40,7 @@ html,
 body,
 #root {
   height: 100%;
+  overflow-x: hidden;
 }
 
 /* -------------------- Background: shimmer + circuit (light & dark) --------------------
@@ -216,7 +217,7 @@ body {
 }
 
 section {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: 5rem;
 }
 
 /* Rotating text fade animation */

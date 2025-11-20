@@ -14,7 +14,7 @@ export default function About() {
 
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             About Me
           </h2>
           <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full"></div>
@@ -45,7 +45,7 @@ export default function About() {
           {/* Right: Bio */}
           <div className="lg:col-span-3 space-y-6">
             {/* Bio - 2 paragraphs */}
-            <div className="space-y-4 text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+            <div className="space-y-4 text-gray-700 dark:text-gray-300 text-base sm:text-lg leading-relaxed">
               <p>
                 Hi! I'm <span className="font-bold text-black dark:text-white">Aakash Raj</span>, a passionate Frontend Developer who thrives on crafting intuitive and dynamic web experiences. I specialize in the React ecosystem, building applications that are not just functional but also visually stunning and performant.
               </p>
@@ -62,7 +62,7 @@ export default function About() {
                 return (
                   <div
                     key={idx}
-                    className="text-center p-4 rounded-xl bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:scale-105 transition-transform"
+                    className="text-center p-4 rounded-xl bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-gray-800 hover:scale-105 transition-transform"
                   >
                     <Icon className="w-6 h-6 mx-auto mb-2 text-[#79b072] dark:text-[#0a8a3f]" />
                     <div className="text-2xl font-bold text-black dark:text-white">{stat.value}</div>

@@ -74,7 +74,7 @@ export default function Contact() {
 
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             Get In Touch
           </h2>
           <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full mb-6"></div>
@@ -95,7 +95,7 @@ export default function Contact() {
                 return (
                   <div
                     key={idx}
-                    className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800 hover:border-[#79b072] dark:hover:border-[#0a8a3f] transition-all duration-300"
+                    className="bg-green-50 dark:bg-green-900/30 rounded-xl p-6 border border-green-200 dark:border-gray-800 hover:border-[#79b072] dark:hover:border-[#0a8a3f] transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-full accent-gradient dark:accent-gradient-dark flex items-center justify-center shrink-0">
@@ -125,7 +125,7 @@ export default function Contact() {
             </div>
 
             {/* Social Links */}
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-800">
+            <div className="bg-green-50 dark:bg-green-900/30 rounded-xl p-6 border border-green-200 dark:border-gray-800">
               <h3 className="text-lg font-semibold text-black dark:text-white mb-4">
                 Connect With Me
               </h3>
@@ -159,7 +159,7 @@ export default function Contact() {
 
           {/* Right Side - Contact Form */}
           <div className="lg:col-span-3">
-            <div className="bg-white dark:bg-gray-900 rounded-xl p-6 sm:p-8 border border-gray-200 dark:border-gray-800">
+            <div className="bg-green-50 dark:bg-green-900/30 rounded-xl p-6 sm:p-8 border border-green-200 dark:border-gray-800">
 
               {/* Success Message */}
               {submitted && (

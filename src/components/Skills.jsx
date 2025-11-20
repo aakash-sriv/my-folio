@@ -40,12 +40,12 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="min-h-screen py-4 top-1 px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="min-h-screen py-4 top-1 px-6 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             Skills & Technologies
           </h2>
           <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full"></div>
@@ -77,7 +77,7 @@ export default function Skills() {
 
                   {/* Icon and text need z-index to show above gradient */}
                   <Icon size={18} className="relative z-10" />
-                  <span className="hidden sm:inline relative z-10">{tab.label}</span>
+                  <span className={`${isActive ? 'inline' : 'hidden'} sm:inline relative z-10`}>{tab.label}</span>
                 </button>
               );
             })}
@@ -89,7 +89,7 @@ export default function Skills() {
           {skills[activeTab].map((skill, idx) => (
             <div
               key={idx}
-              className="group relative bg-white dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-800 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-4"
+              className="group relative bg-green-50 dark:bg-green-900/30 rounded-xl p-4 border border-green-200 dark:border-gray-800 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-4"
             >
               {/* Skill Icon */}
               <div className="w-12 h-12 shrink-0 flex items-center justify-center">
