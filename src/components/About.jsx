@@ -47,11 +47,11 @@ export default function About() {
             {/* Bio - 2 paragraphs */}
             <div className="space-y-4 text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
               <p>
-                Hi! I'm <span className="font-bold text-black dark:text-white">Aakash Raj</span>, a Frontend Developer who loves crafting modern web experiences. I specialize in React and Next.js, building applications that are fast, beautiful, and built to scale. Whether it's optimizing performance or designing intuitive interfaces, I'm all about turning ideas into polished products.
+                Hi! I'm <span className="font-bold text-black dark:text-white">Aakash Raj</span>, a passionate Frontend Developer who thrives on crafting intuitive and dynamic web experiences. I specialize in the React ecosystem, building applications that are not just functional but also visually stunning and performant.
               </p>
 
               <p>
-                With hands-on experience from my internship at XcodeTeam and recognition as a <span className="font-bold text-[#79b072] dark:text-[#0a8a3f]">Top 1% performer</span> at PwC, I bring both technical skills and a passion for continuous growth. When I'm not coding, you'll find me solving problems on LeetCode or exploring new frameworks and tools.
+                My journey is driven by a relentless curiosity to learn and build. Whether it's solving complex algorithmic problems or deep-diving into modern UI/UX patterns, I'm always pushing my boundaries. I believe in writing clean, maintainable code and turning creative concepts into reality.
               </p>
             </div>
 

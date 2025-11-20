@@ -1,6 +1,10 @@
-import { Briefcase, Award, GraduationCap } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Briefcase, Award } from 'lucide-react';
 
 export default function Experience() {
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const containerRef = useRef(null);
+
   const timeline = [
     {
       year: "Jul 2025 - Sep 2025",
@@ -17,16 +21,28 @@ export default function Experience() {
       description: "Ranked Top 1% among 500+ participants nationwide. Completed 80+ hours training in AWS, Azure, and GCP. Gained hands-on DevOps experience in 3+ digital transformation case studies.",
       icon: Award,
       type: "work"
-    },
-    {
-      year: "2021 - 2025",
-      title: "B.Tech in Electronics & Communication",
-      company: "Haldia Institute of Technology",
-      description: "CGPA: 8.05 • Focused on Data Structures, Algorithms, DBMS, Operating Systems, Computer Networks, and Object-Oriented Programming.",
-      icon: GraduationCap,
-      type: "education"
     }
   ];
+
+  // Handle scroll to activate items
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+
+      const items = containerRef.current.querySelectorAll('.timeline-item');
+      const triggerBottom = window.innerHeight * 0.8;
+
+      items.forEach((item, index) => {
+        const box = item.getBoundingClientRect();
+        if (box.top < triggerBottom) {
+          setActiveIndex(prev => Math.max(prev, index));
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <section id="experience" className="min-h-screen py-4 px-4 sm:px-6 lg:px-8">
@@ -35,99 +51,88 @@ export default function Experience() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-black dark:text-white mb-4">
-            Experience & Education
+            Experience
           </h2>
           <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full"></div>
           <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">
-            My professional journey and academic background
+            My professional journey
           </p>
         </div>
 
-        {/* Timeline */}
-        <div className="relative max-w-5xl mx-auto">
-          {/* Vertical line */}
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 accent-gradient dark:accent-gradient-dark transform md:-translate-x-1/2"></div>
+        {/* Metro Timeline */}
+        <div ref={containerRef} className="relative max-w-4xl mx-auto pl-8 md:pl-0">
 
-          {/* Timeline items */}
-          <div className="space-y-12">
+          {/* Main Track (Background Line) */}
+          <div className="absolute left-0 md:left-12 top-0 bottom-0 w-1 bg-gray-200 dark:bg-gray-800 rounded-full"></div>
+
+          {/* Active Track (Light Up Effect) */}
+          <div
+            className="absolute left-0 md:left-12 top-0 w-1 bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.8)] transition-all duration-700 ease-out rounded-full"
+            style={{
+              height: activeIndex === -1 ? '0%' : `${((activeIndex + 1) / timeline.length) * 100}%`
+            }}
+          ></div>
+
+          <div className="space-y-16">
             {timeline.map((item, idx) => {
               const Icon = item.icon;
-              const isLeft = idx % 2 === 0; // Alternate sides on desktop
+              const isActive = idx <= activeIndex;
 
               return (
                 <div
                   key={idx}
-                  className={`relative flex items-start gap-6 md:gap-0 ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-                    }`}
+                  className="timeline-item relative flex flex-col md:flex-row gap-8 group"
+                  onMouseEnter={() => setActiveIndex(idx)}
                 >
+                  {/* Station Node */}
+                  <div className="absolute left-[-4px] md:left-[44px] top-0 z-10">
+                    <div
+                      className={`w-3 h-3 rounded-full border-2 transition-all duration-500 ${isActive
+                        ? 'bg-emerald-500 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,1)] scale-150'
+                        : 'bg-white dark:bg-gray-900 border-gray-400 dark:border-gray-600'
+                        }`}
+                    ></div>
+                  </div>
 
-                  {/* Content card - takes half width on desktop */}
-                  <div className={`flex-1 md:w-5/12 ${isLeft ? 'md:pr-12' : 'md:pl-12'}`}>
-                    <div className="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-800 hover:shadow-xl transition-all group">
+                  {/* Content Card */}
+                  <div className="md:ml-24 flex-1">
+                    <div
+                      className={`relative p-6 rounded-2xl border transition-all duration-500 ${isActive
+                        ? 'bg-white dark:bg-gray-900 border-emerald-500/50 shadow-[0_0_30px_-10px_rgba(16,185,129,0.3)]'
+                        : 'bg-gray-50 dark:bg-gray-900/50 border-gray-200 dark:border-gray-800'
+                        }`}
+                    >
+                      {/* Connector Line (Horizontal) */}
+                      <div className={`absolute top-1.5 -left-8 md:-left-12 w-8 md:w-12 h-0.5 transition-all duration-500 ${isActive ? 'bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.8)]' : 'bg-transparent'
+                        }`}></div>
 
-                      {/* Year badge */}
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-sm font-semibold rounded-full">
+                      <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className={`p-2 rounded-lg transition-colors duration-300 ${isActive ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400' : 'bg-gray-100 dark:bg-gray-800 text-gray-500'
+                            }`}>
+                            <Icon className="w-5 h-5" />
+                          </div>
+                          <h3 className="text-xl font-bold text-black dark:text-white">
+                            {item.title}
+                          </h3>
+                        </div>
+                        <span className="px-3 py-1 text-sm font-medium rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400">
                           {item.year}
-                        </span>
-                        <span className={`text-xs font-medium px-2 py-1 rounded ${item.type === 'work'
-                            ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
-                            : 'bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400'
-                          }`}>
-                          {item.type === 'work' ? 'Work' : 'Education'}
                         </span>
                       </div>
 
-                      {/* Title */}
-                      <h4 className="text-xl font-bold text-black dark:text-white mb-2 group-hover:text-[#79b072] dark:group-hover:text-[#0a8a3f] transition-colors">
-                        {item.title}
-                      </h4>
-
-                      {/* Company */}
-                      <p className="text-[#79b072] dark:text-[#0a8a3f] font-medium mb-3">
+                      <div className="text-lg font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
                         {item.company}
-                      </p>
+                      </div>
 
-                      {/* Description */}
                       <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
                   </div>
-
-                  {/* Center icon - positioned in middle on desktop */}
-                  <div className="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 shrink-0">
-                    <div className="w-16 h-16 rounded-full accent-gradient dark:accent-gradient-dark flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform z-10">
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
-                  </div>
-
-                  {/* Spacer for the other side on desktop */}
-                  <div className="hidden md:block md:w-5/12"></div>
-
                 </div>
               );
             })}
-          </div>
-        </div>
-
-        {/* Bottom Stats */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center gap-8 px-8 py-4 bg-gray-100 dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800">
-            <div>
-              <div className="text-2xl font-bold text-black dark:text-white">2+</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">Experiences</div>
-            </div>
-            <div className="w-px h-8 bg-gray-300 dark:bg-gray-700"></div>
-            <div>
-              <div className="text-2xl font-bold text-black dark:text-white">8.05</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">CGPA</div>
-            </div>
-            <div className="w-px h-8 bg-gray-300 dark:bg-gray-700"></div>
-            <div>
-              <div className="text-2xl font-bold text-black dark:text-white">Top 1%</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">at PwC</div>
-            </div>
           </div>
         </div>
 

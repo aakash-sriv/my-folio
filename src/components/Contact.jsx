@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, MapPin, Linkedin, Github, Twitter, Send, CheckCircle } from 'lucide-react';
+import { Mail, Linkedin, Github, Twitter, Send, CheckCircle } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -15,14 +15,8 @@ export default function Contact() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'your.email@example.com',
-      link: 'mailto:your.email@example.com'
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Patna, Bihar, India',
-      link: null
+      value: 'aakashsriv06@gmail.com',
+      link: 'mailto:aakashsriv06@gmail.com'
     }
   ];
 
@@ -57,7 +51,13 @@ export default function Contact() {
   const handleSubmit = () => {
     setIsSubmitting(true);
 
-    // Simulate form submission
+    // Construct mailto link
+    const subject = encodeURIComponent(formData.subject || 'Portfolio Contact');
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+
+    window.location.href = `mailto:aakashsriv06@gmail.com?subject=${subject}&body=${body}`;
+
+    // Simulate form submission for UI feedback
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
@@ -65,7 +65,7 @@ export default function Contact() {
 
       // Reset success message after 5 seconds
       setTimeout(() => setSubmitted(false), 5000);
-    }, 1500);
+    }, 1000);
   };
 
   return (

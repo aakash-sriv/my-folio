@@ -4,38 +4,39 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: 'Project Title One',
-      description: 'A comprehensive full-stack application built with modern technologies. Features include real-time updates, user authentication, and responsive design. Optimized for performance and scalability.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
-      tags: ['React', 'Node.js', 'MongoDB', 'Tailwind'],
-      github: '#',
-      live: '#',
+      title: 'PrepPerfect',
+      description: 'AI-powered interview preparation platform that generates role-specific questions, provides detailed explanations, and helps you master your next interview.',
+      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80',
+      tags: ['React', 'Vite', 'Tailwind', 'Framer Motion'],
+      github: 'https://github.com/aakash-sriv/PrepPerfect',
+      live: 'https://prep-perfect.vercel.app',
       featured: true
     },
     {
       id: 2,
-      title: 'Project Title Two',
-      description: 'An innovative web application focusing on user experience and modern design principles. Built with cutting-edge frameworks and follows best practices for code quality.',
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80',
-      tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma'],
-      github: '#',
-      live: '#',
+      title: 'SmartSpend',
+      description: 'An AI-powered financial management platform that helps you track, analyze, and optimize your spending with real-time insights and intelligent automation.',
+      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80',
+      tags: ['Next.js', 'Tailwind', 'Prisma', 'Gemini AI'],
+      github: 'https://github.com/aakash-sriv/SmartSpend',
+      live: 'https://smart-spend-ak.vercel.app/',
       featured: true
     },
     {
       id: 3,
-      title: 'Project Title Three',
-      description: 'A beautiful and interactive frontend project showcasing advanced CSS animations, smooth transitions, and pixel-perfect design implementation with excellent accessibility.',
-      image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80',
-      tags: ['React', 'Framer Motion', 'Tailwind', 'API'],
+      title: 'Coming Soon',
+      description: 'Something exciting is in the works! A new project that pushes the boundaries of what is possible on the web. Stay tuned for updates.',
+      image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
+      tags: ['Innovation', 'Future', 'Web3', 'AI'],
       github: '#',
       live: '#',
-      featured: false
+      featured: false,
+      isComingSoon: true
     }
   ];
 
   return (
-    <section id="projects" className="min-h-screen py-2 px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="min-h-screen py-4 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
@@ -54,9 +55,18 @@ export default function Projects() {
           {projects.map((project, idx) => (
             <div
               key={project.id}
-              className="group bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-300"
+              className={`group bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 ${project.isComingSoon ? 'relative' : ''
+                }`}
               style={{ animationDelay: `${idx * 100}ms` }}
             >
+              {/* Coming Soon Overlay */}
+              {project.isComingSoon && (
+                <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px] z-20 flex flex-col items-center justify-center text-center p-6">
+                  <div className="text-4xl font-bold text-white mb-2 animate-pulse">Coming Soon</div>
+                  <p className="text-gray-200 text-sm">Cooking up something special...</p>
+                </div>
+              )}
+
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
                 <img
@@ -66,7 +76,7 @@ export default function Projects() {
                 />
 
                 {/* Featured Badge */}
-                {project.featured && (
+                {project.featured && !project.isComingSoon && (
                   <div className="absolute top-3 right-3 flex items-center gap-1 accent-gradient dark:accent-gradient-dark text-white px-3 py-1 rounded-full text-xs font-semibold">
                     <Sparkles size={12} />
                     Featured
@@ -102,26 +112,28 @@ export default function Projects() {
                 </div>
 
                 {/* Links */}
-                <div className="flex items-center gap-3">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
-                  >
-                    <Github size={16} />
-                    Code
-                  </a>
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-4 py-2 accent-gradient dark:accent-gradient-dark text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-medium"
-                  >
-                    <ExternalLink size={16} />
-                    Live Demo
-                  </a>
-                </div>
+                {!project.isComingSoon && (
+                  <div className="flex items-center gap-3">
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
+                    >
+                      <Github size={16} />
+                      Code
+                    </a>
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 accent-gradient dark:accent-gradient-dark text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-medium"
+                    >
+                      <ExternalLink size={16} />
+                      Live Demo
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           ))}
