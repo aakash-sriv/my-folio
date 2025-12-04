@@ -54,9 +54,6 @@ export default function Experience() {
             Experience
           </h2>
           <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full"></div>
-          <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">
-            My professional journey
-          </p>
         </div>
 
         {/* Metro Timeline */}

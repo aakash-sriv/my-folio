@@ -1,4 +1,4 @@
-import { Code2, Award, Briefcase } from 'lucide-react';
+import { Code2, Award, Briefcase, Github, Linkedin, Twitter } from 'lucide-react';
 
 export default function About() {
   const stats = [
@@ -25,20 +25,39 @@ export default function About() {
 
           {/* Left: Image */}
           <div className="lg:col-span-2">
-            <div className="relative">
-              {/* TODO: Replace this div with your actual image */}
-              {/* <img src="/path-to-your-image.jpg" alt="Aakash Raj" className="rounded-2xl w-full shadow-2xl" /> */}
+            {/* Avatar Image */}
+            <div className="relative group">
+              <div className="relative w-64 h-64 mx-auto mb-8">
+                {/* Image */}
+                <img
+                  src="/avatar.jpg"
+                  alt="Aakash Raj"
+                  className="w-full h-full rounded-full shadow-2xl border-4 border-white/20 dark:border-white/10 relative z-10"
+                />
 
-              {/* Placeholder - Remove this div when you add your image */}
-              <div className="aspect-square rounded-2xl accent-gradient dark:accent-gradient-dark flex items-center justify-center shadow-2xl">
-                <div className="text-center text-white">
-                  <div className="text-6xl font-bold mb-2">AR</div>
-                  <div className="text-sm opacity-80">Your Photo Here</div>
-                </div>
+                {/* Decorative glow behind image */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-[#79b072] to-[#0a8a3f] blur-2xl opacity-40 group-hover:opacity-60 transition-opacity duration-500 -z-10"></div>
               </div>
 
-              {/* Decorative floating element */}
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 accent-gradient dark:accent-gradient-dark rounded-full blur-3xl opacity-20 -z-10"></div>
+              {/* Social Links */}
+              <div className="flex justify-center gap-6">
+                {[
+                  { icon: Github, href: "https://github.com/aakash-sriv", label: "GitHub" },
+                  { icon: Linkedin, href: "https://linkedin.com/in/aakash--raj", label: "LinkedIn" },
+                  { icon: Twitter, href: "https://twitter.com/aakash__sr", label: "Twitter" }
+                ].map((social, idx) => (
+                  <a
+                    key={idx}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-full bg-white/5 hover:bg-white/10 border border-black/5 dark:border-white/10 hover:scale-110 transition-all duration-300 group/icon"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="w-5 h-5 text-gray-700 dark:text-gray-300 group-hover/icon:text-[#79b072] dark:group-hover/icon:text-[#0a8a3f] transition-colors" />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
