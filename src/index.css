@@ -260,26 +260,50 @@ section {
 }
 
 /* Custom scrollbar for GitHub heatmap */
-.overflow-x-auto::-webkit-scrollbar {
+/* Custom scrollbar for GitHub heatmap - invisible by default, visible on hover */
+.heatmap-scroll {
+  /* Hide scrollbar for Firefox/IE/Edge by default */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.heatmap-scroll::-webkit-scrollbar {
   height: 6px;
 }
 
-.overflow-x-auto::-webkit-scrollbar-track {
-  background: #e5e7eb;
+.heatmap-scroll::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.heatmap-scroll::-webkit-scrollbar-thumb {
+  background: transparent !important;
   border-radius: 3px;
 }
 
-.dark .overflow-x-auto::-webkit-scrollbar-track {
-  background: #1f2937;
+/* On hover, show scrollbar */
+.heatmap-scroll:hover {
+  scrollbar-width: thin;
+  scrollbar-color: #79b072 #e5e7eb;
 }
 
-.overflow-x-auto::-webkit-scrollbar-thumb {
-  background: #79b072;
-  border-radius: 3px;
+.dark .heatmap-scroll:hover {
+  scrollbar-color: #79b072 #1f2937;
 }
 
-.overflow-x-auto::-webkit-scrollbar-thumb:hover {
-  background: #5a9050;
+.heatmap-scroll:hover::-webkit-scrollbar-track {
+  background: #e5e7eb !important;
+}
+
+.dark .heatmap-scroll:hover::-webkit-scrollbar-track {
+  background: #1f2937 !important;
+}
+
+.heatmap-scroll:hover::-webkit-scrollbar-thumb {
+  background: #79b072 !important;
+}
+
+.heatmap-scroll:hover::-webkit-scrollbar-thumb:hover {
+  background: #5a9050 !important;
 }
 
 /* Custom text selection - light green */

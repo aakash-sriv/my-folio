@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { ArrowDown, Send } from 'lucide-react';
+import { GitHubCalendar } from 'react-github-calendar';
 
 export default function Hero() {
   const targetName = "Aakash Raj";
@@ -10,6 +11,25 @@ export default function Hero() {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&";
   const scrambleRef = useRef(null);
   const cycleRef = useRef(null);
+
+  // Theme Toggle Sync
+  const [colorScheme, setColorScheme] = useState('light');
+
+  useEffect(() => {
+    const checkScheme = () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      setColorScheme(isDark ? 'dark' : 'light');
+    };
+
+    // Initial check
+    checkScheme();
+
+    // Watch for class changes on <html>
+    const observer = new MutationObserver(checkScheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+
+    return () => observer.disconnect();
+  }, []);
 
   // Live clock + blinking dot
   useEffect(() => {
@@ -172,32 +192,28 @@ export default function Hero() {
         </div>
 
         {/* GitHub Heatmap - Centered */}
-        <div className="mt-8 max-w-3xl mx-auto w-full">
-          <div className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-800 p-3 sm:p-4">
+        <div className="mt-20 max-w-3xl mx-auto w-full">
+          <div className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-800 p-4 sm:p-6 flex justify-center">
 
-            {/* Scrollable container - Green themed ghchart */}
-            <div className="overflow-x-auto pb-1">
-              {/* Single Image - Inverted in dark mode */}
-              <img
-                src="https://ghchart.rshah.org/40c463/aakash-sriv"
-                alt="GitHub Contribution Heatmap"
-                className="min-w-[500px] max-w-full h-auto block dark:invert dark:hue-rotate-180"
-                loading="lazy"
+            <div className="w-full overflow-x-auto flex justify-center heatmap-scroll">
+              <GitHubCalendar
+                username="aakash-sriv"
+                colorScheme={colorScheme}
+                blockSize={12}
+                blockMargin={4}
+                blockRadius={7}
+                fontSize={12}
+                theme={{
+                  light: ['#ffffff', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+                  dark: ['#000000', '#0e4429', '#006d32', '#26a641', '#39d353'],
+                }}
+                style={{
+                  color: 'inherit',
+                  margin: 'auto'
+                }}
               />
             </div>
 
-            <div className="flex items-center justify-between mt-2 text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">
-              <span>Less</span>
-              <div className="flex gap-0.5 sm:gap-1">
-                {/* Light mode: green-50 for empty, Dark mode: near black */}
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-green-50 dark:bg-[#161b22]"></div>
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#c6e6c3] dark:bg-[#0e4429]"></div>
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#7bc96f] dark:bg-[#006d32]"></div>
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#40c463] dark:bg-[#26a641]"></div>
-                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#216e39] dark:bg-[#39d353]"></div>
-              </div>
-              <span>More</span>
-            </div>
           </div>
         </div>
 
