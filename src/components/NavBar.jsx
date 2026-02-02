@@ -176,7 +176,7 @@ export default function NavBar() {
           {/* Mobile: All Icons + Theme Toggle */}
           <div className="md:hidden flex items-center gap-1">
 
-            <div className="flex items-center gap-0.5 bg-gray-100 dark:bg-gray-900 rounded-full p-1 border border-gray-200 dark:border-gray-800">
+            <div className="flex items-center gap-1 bg-gray-100 dark:bg-gray-900 rounded-full p-1.5 border border-gray-200 dark:border-gray-800">
               {links.map((link) => {
                 const Icon = link.icon;
                 const isActive = activeSection === link.id;

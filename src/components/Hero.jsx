@@ -1,60 +1,49 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowDown, ArrowRight, Send } from 'lucide-react';
+import { ArrowDown, Send } from 'lucide-react';
 
 export default function Hero() {
-  const [text, setText] = useState('');
-  const [showCursor, setShowCursor] = useState(true);
-  const fullText = "echo 'Hello, visitor! Welcome to my portfolio'";
+  const targetName = "Aakash Raj";
+  const [scrambled, setScrambled] = useState('');
+  const [currentTime, setCurrentTime] = useState('');
+  const [showDot, setShowDot] = useState(true);
 
-  // Matrix-scramble rotating texts
-  const rotatingTexts = [
-    "Aakash Raj",
-    "a Frontend Developer",
-    "a Full Stack Developer",
-    "a Problem Solver"
-  ];
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [scrambled, setScrambled] = useState(''); // what is shown in headline
-
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*()[]{}<>/?|\\+-=~"; // matrix chars
-
-  // refs to keep intervals for cleanup
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&";
   const scrambleRef = useRef(null);
   const cycleRef = useRef(null);
-  const cursorRef = useRef(null);
-  const typingRef = useRef(null);
 
-  // Terminal typing (unchanged)
+  // Live clock + blinking dot
   useEffect(() => {
-    let i = 0;
-    typingRef.current = setInterval(() => {
-      if (i < fullText.length) {
-        setText(fullText.slice(0, i + 1));
-        i++;
-      } else {
-        clearInterval(typingRef.current);
-      }
-    }, 50);
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString('en-US', {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      }));
+    };
 
-    cursorRef.current = setInterval(() => {
-      setShowCursor(p => !p);
-    }, 500);
+    updateTime();
+    const clockInterval = setInterval(updateTime, 1000);
+
+    const dotInterval = setInterval(() => {
+      setShowDot(prev => !prev);
+    }, 1000);
 
     return () => {
-      clearInterval(typingRef.current);
-      clearInterval(cursorRef.current);
+      clearInterval(clockInterval);
+      clearInterval(dotInterval);
     };
   }, []);
 
-  // scramble function — creates matrix effect then reveals characters
+  // Scramble effect for name
   useEffect(() => {
     const runScramble = () => {
-      const target = rotatingTexts[currentIndex] || '';
+      const target = targetName;
       const len = target.length;
-      let revealIndex = 0; // how many characters have been fixed
+      let revealIndex = 0;
       let tick = 0;
 
-      // ensure initial scrambled state length matches target (keep spaces)
       const buildRandom = () =>
         target
           .split('')
@@ -63,17 +52,14 @@ export default function Hero() {
 
       setScrambled(buildRandom());
 
-      // run rapid scramble + gradual reveal
       scrambleRef.current = setInterval(() => {
         tick++;
 
-        // produce a random-frame where unrevealed positions show random chars
         const frame = target
           .split('')
           .map((ch, i) => {
             if (ch === ' ') return ' ';
-            if (i < revealIndex) return ch; // already revealed
-            // sometimes briefly show the correct char randomly to add variance
+            if (i < revealIndex) return ch;
             if (Math.random() < 0.02) return ch;
             return chars[Math.floor(Math.random() * chars.length)];
           })
@@ -81,38 +67,30 @@ export default function Hero() {
 
         setScrambled(frame);
 
-        // every few ticks, advance revealIndex by 1 (controls reveal speed)
-        // adjust modulus to speed up/down reveal
         if (tick % 4 === 0) {
           revealIndex++;
           if (revealIndex > len) revealIndex = len;
         }
 
-        // when fully revealed, stop scramble interval
         if (revealIndex >= len) {
           clearInterval(scrambleRef.current);
-          // ensure final correct text (spaces preserved)
           setScrambled(target);
         }
-      }, 20); // 30ms per scramble frame — tweak for faster/slower flicker
+      }, 20);
     };
 
-    // start scramble immediately for the current index
     runScramble();
 
-    // cycle to next text every 3000ms (3s)
     cycleRef.current = setInterval(() => {
-      setCurrentIndex(prev => (prev + 1) % rotatingTexts.length);
-    }, 3000);
+      runScramble();
+    }, 5000);
 
     return () => {
       clearInterval(scrambleRef.current);
       clearInterval(cycleRef.current);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentIndex]); // restart scramble when index changes
+  }, []);
 
-  // Smooth scroll helper
   const scrollToSection = (sectionId) => (e) => {
     e.preventDefault();
     const el = document.getElementById(sectionId);
@@ -120,141 +98,109 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:pt-16 lg:pb-0">
-      <div className="max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+    <section id="home" className="min-h-screen flex flex-col px-4 sm:px-6 lg:px-8 pt-20 pb-8">
+      <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col">
 
-          {/* Left */}
-          <div className="text-center lg:text-left space-y-6">
-            <div className="relative overflow-hidden inline-flex items-center gap-2 px-4 py-2 rounded-full 
-                bg-green-100/30 dark:bg-green-900/30 
-                border border-green-200 dark:border-green-800
-                before:content-[''] before:absolute before:inset-y-0 before:left-[-150%] before:w-[120%]
-                before:bg-[linear-gradient(115deg,transparent_0%,rgba(255,255,255,0.6)_50%,transparent_100%)]
-                before:animate-[shine_2.2s_infinite]">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span className="text-sm font-medium text-green-700 dark:text-green-300">
-                Available for work/opportunities
-              </span>
+        {/* Clock - Small in corner on mobile, normal on desktop */}
+        <div className="flex justify-end mb-2 sm:mb-10 mt-2 sm:mt-4 pr-2 sm:pr-20">
+          <div className="flex items-center gap-1 sm:gap-2 text-[10px] sm:text-base font-mono text-[#79b072] dark:text-[#0a8a3f]">
+            <span
+              className={`w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full transition-opacity duration-100 ${showDot ? 'opacity-100' : 'opacity-0'} bg-[#79b072] dark:bg-[#0a8a3f]`}
+            ></span>
+            <span>{currentTime}</span>
+          </div>
+        </div>
+
+        {/* Main Hero Content - Left Aligned within margins */}
+        <div className="flex-1 flex items-center">
+          <div className="w-full text-left space-y-6">
+
+            {/* Available Tag */}
+            <div className="flex justify-start">
+              <div className="relative overflow-hidden inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full 
+                  bg-green-100/30 dark:bg-green-900/30 
+                  border border-green-200 dark:border-green-800
+                  before:content-[''] before:absolute before:inset-y-0 before:left-[-150%] before:w-[120%]
+                  before:bg-[linear-gradient(115deg,transparent_0%,rgba(255,255,255,0.6)_50%,transparent_100%)]
+                  before:animate-[shine_2.2s_infinite]">
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-xs sm:text-sm font-medium text-green-700 dark:text-green-300">
+                  Available for work
+                </span>
+              </div>
             </div>
+
+            {/* Name with Scramble */}
             <div className="space-y-4">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-black dark:text-white">
-                <span>Hi, I'm&nbsp;</span>
-                <span className="inline-block align-baseline min-h-[4.5rem] sm:min-h-[3.75rem] lg:min-h-[4.5rem]">
-                  <span className="text-[#79b072] dark:text-[#0a8a3f] font-mono block" aria-live="polite" aria-atomic="true">
-                    {scrambled}
-                  </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-black dark:text-white break-words">
+                <span>Hi, I'm </span>
+                <span className="text-[#79b072] dark:text-[#0a8a3f] font-mono inline-block" aria-live="polite" aria-atomic="true">
+                  {scrambled}
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300">
+              <p className="text-base sm:text-lg text-gray-700 dark:text-gray-300 max-w-xl">
                 Been building. Still building. Always building. <br />
                 Clean code, sharp tools, and a bit of Next.js magic.
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            {/* Buttons */}
+            <div className="flex flex-wrap justify-start gap-3 sm:gap-4">
               <a
                 href="#projects"
                 onClick={scrollToSection('projects')}
                 className="inline-flex items-center justify-center gap-2 
-                    px-6 py-3 rounded-lg 
+                    px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg 
                     accent-gradient dark:accent-gradient-dark
                     text-white font-medium hover:opacity-90 
-                    transition cursor-pointer"
+                    transition cursor-pointer text-sm sm:text-base"
               >
                 <span>View My Work</span>
-                <ArrowDown size={18} />
+                <ArrowDown size={16} />
               </a>
               <a
                 href="#contact"
                 onClick={scrollToSection('contact')}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 text-black dark:text-white font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-lg border-2 border-gray-300 dark:border-gray-700 text-black dark:text-white font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition cursor-pointer text-sm sm:text-base"
               >
-                <Send size={18} />
-                <span>Let's Connect</span>
+                <Send size={16} />
+                <span>Drop a Hi</span>
               </a>
             </div>
           </div>
+        </div>
 
-          {/* Right: Terminal */}
-          <div className="relative">
-            <div className="bg-gray-900 rounded-lg overflow-hidden shadow-2xl border border-gray-800">
-              <div className="flex items-center gap-2 px-4 py-3 bg-gray-800 border-b border-gray-700">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                </div>
-                <div className="flex-1 text-center">
-                  <span className="text-sm text-gray-400">terminal ~ portfolio</span>
-                </div>
-              </div>
+        {/* GitHub Heatmap - Centered */}
+        <div className="mt-8 max-w-3xl mx-auto w-full">
+          <div className="bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-800 p-3 sm:p-4">
 
-              <div className="p-4 font-mono text-sm space-y-3 min-h-[300px]">
-                <div className="text-gray-500">
-                  Last login: {new Date().toLocaleString()}
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-start gap-2">
-                    <span className="text-orange-400">visitor@root</span>
-                    <span className="text-gray-500">:</span>
-                    <span className="text-blue-400">~</span>
-                    <span className="text-gray-400">$</span>
-                    <span className="text-green-400">{text}</span>
-                    {showCursor && <span className="text-white">|</span>}
-                  </div>
-
-                  {text.length === fullText.length && (
-                    <>
-                      <div className="text-gray-300 pl-4">
-                        Hello, visitor! Welcome to my portfolio
-                      </div>
-
-                      <div className="flex items-start gap-2 pt-2">
-                        <span className="text-orange-400">visitor@root</span>
-                        <span className="text-gray-500">:</span>
-                        <span className="text-blue-400">~</span>
-                        <span className="text-gray-400">$</span>
-                        <span className="text-green-400">./run_portfolio.sh</span>
-                      </div>
-
-                      <div className="space-y-1 pl-4 text-gray-400">
-                        <div>
-                          <span className="text-yellow-400">⚡</span> Initializing portfolio components...
-                        </div>
-                        <div>
-                          <span className="text-green-400">✓</span> Loading frontend skills... <span className="text-green-400">Done!</span>
-                        </div>
-                        <div>
-                          <span className="text-green-400">✓</span> Loading backend expertise... <span className="text-green-400">Done!</span>
-                        </div>
-                        <div>
-                          <span className="text-green-400">✓</span> Connecting creative modules... <span className="text-green-400">Done!</span>
-                        </div>
-                        <div className="text-yellow-400 pt-2">
-                          Portfolio is ready to explore!
-                        </div>
-                      </div>
-
-                      <div className="flex items-start gap-2 pt-2">
-                        <span className="text-orange-400">visitor@root</span>
-                        <span className="text-gray-500">:</span>
-                        <span className="text-blue-400">~</span>
-                        <span className="text-gray-400">$</span>
-                        <span className="text-white animate-pulse">_</span>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
+            {/* Scrollable container - Green themed ghchart */}
+            <div className="overflow-x-auto pb-1">
+              {/* Single Image - Inverted in dark mode */}
+              <img
+                src="https://ghchart.rshah.org/40c463/aakash-sriv"
+                alt="GitHub Contribution Heatmap"
+                className="min-w-[500px] max-w-full h-auto block dark:invert dark:hue-rotate-180"
+                loading="lazy"
+              />
             </div>
 
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 accent-gradient rounded-full blur-3xl opacity-20"></div>
+            <div className="flex items-center justify-between mt-2 text-[10px] sm:text-xs text-gray-500 dark:text-gray-400">
+              <span>Less</span>
+              <div className="flex gap-0.5 sm:gap-1">
+                {/* Light mode: green-50 for empty, Dark mode: near black */}
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-green-50 dark:bg-[#161b22]"></div>
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#c6e6c3] dark:bg-[#0e4429]"></div>
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#7bc96f] dark:bg-[#006d32]"></div>
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#40c463] dark:bg-[#26a641]"></div>
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-sm bg-[#216e39] dark:bg-[#39d353]"></div>
+              </div>
+              <span>More</span>
+            </div>
           </div>
-
         </div>
+
       </div>
     </section>
   );

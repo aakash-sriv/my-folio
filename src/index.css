@@ -43,6 +43,14 @@ body,
   overflow-x: hidden;
 }
 
+/* Hardening for responsive media */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
 /* -------------------- Background: shimmer + circuit (light & dark) --------------------
    The shimmer layer is first (on top), then the circuit-board pattern layers beneath.
    Animation moves the shimmer diagonally. Reduced-motion users won't see animation.
@@ -249,4 +257,71 @@ section {
 
 .animate-fadeIn {
   animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Custom scrollbar for GitHub heatmap */
+.overflow-x-auto::-webkit-scrollbar {
+  height: 6px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-track {
+  background: #e5e7eb;
+  border-radius: 3px;
+}
+
+.dark .overflow-x-auto::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb {
+  background: #79b072;
+  border-radius: 3px;
+}
+
+.overflow-x-auto::-webkit-scrollbar-thumb:hover {
+  background: #5a9050;
+}
+
+/* Custom text selection - light green */
+::selection {
+  background: #c8e6c9;
+  color: #1a1a1a;
+}
+
+.dark ::selection {
+  background: #2d5a3d;
+  color: #ffffff;
+}
+
+/* Global scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #79b072;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a9050;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #79b072 #f1f1f1;
+}
+
+.dark * {
+  scrollbar-color: #79b072 #1a1a1a;
 }

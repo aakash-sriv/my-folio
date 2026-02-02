@@ -13,7 +13,6 @@ export default function Skills() {
   const skills = {
     languages: [
       { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg', color: '#00599C' },
-      { name: 'C', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg', color: '#A8B9CC' },
       { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg', color: '#007396' },
       { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', color: '#F7DF1E' },
       { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg', color: '#3178C6' },
@@ -40,11 +39,11 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="min-h-screen py-4 top-1 px-6 sm:px-6 lg:px-8">
+    <section id="skills" className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             Skills & Technologies
           </h2>
@@ -52,8 +51,8 @@ export default function Skills() {
         </div>
 
         {/* Pill Tabs - FIXED */}
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-900 rounded-full py-1.5 px-3 border border-gray-200 dark:border-gray-800">
+        <div className="flex justify-center mb-8">
+          <div className="inline-flex flex-wrap sm:flex-nowrap justify-center items-center gap-2 bg-gray-100 dark:bg-gray-900 rounded-3xl sm:rounded-full py-1.5 px-3 border border-gray-200 dark:border-gray-800">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -85,14 +84,14 @@ export default function Skills() {
         </div>
 
         {/* Skills Grid - 2 cols mobile, 3 cols laptop */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {skills[activeTab].map((skill, idx) => (
             <div
               key={idx}
-              className="group relative bg-green-50 dark:bg-green-900/30 rounded-xl p-4 border border-green-200 dark:border-gray-800 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-4"
+              className="group relative bg-green-50 dark:bg-green-900/30 rounded-xl p-3 sm:p-4 border border-green-200 dark:border-gray-800 hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3 sm:gap-4"
             >
               {/* Skill Icon */}
-              <div className="w-12 h-12 shrink-0 flex items-center justify-center">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 shrink-0 flex items-center justify-center">
                 <img
                   src={skill.icon}
                   alt={skill.name}
@@ -102,7 +101,7 @@ export default function Skills() {
               </div>
 
               {/* Skill Name */}
-              <p className="text-base font-semibold text-gray-700 dark:text-gray-300 group-hover:text-black dark:group-hover:text-white transition-colors">
+              <p className="text-sm sm:text-base font-semibold text-gray-700 dark:text-gray-300 group-hover:text-black dark:group-hover:text-white transition-colors">
                 {skill.name}
               </p>
 

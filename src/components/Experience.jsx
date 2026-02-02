@@ -45,11 +45,11 @@ export default function Experience() {
   }, []);
 
   return (
-    <section id="experience" className="min-h-screen py-4 px-6 sm:px-6 lg:px-8">
+    <section id="experience" className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="text-3xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             Experience
           </h2>
@@ -57,14 +57,14 @@ export default function Experience() {
         </div>
 
         {/* Metro Timeline */}
-        <div ref={containerRef} className="relative max-w-4xl mx-auto pl-8 md:pl-0">
+        <div ref={containerRef} className="relative max-w-4xl mx-auto pl-6 md:pl-0">
 
           {/* Main Track (Background Line) */}
-          <div className="absolute left-0 md:left-12 top-0 bottom-0 w-1 bg-gray-200 dark:bg-gray-800 rounded-full"></div>
+          <div className="absolute left-2 md:left-12 top-0 bottom-0 w-1 bg-gray-200 dark:bg-gray-800 rounded-full"></div>
 
           {/* Active Track (Light Up Effect) */}
           <div
-            className="absolute left-0 md:left-12 top-0 w-1 bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.8)] transition-all duration-700 ease-out rounded-full"
+            className="absolute left-2 md:left-12 top-0 w-1 bg-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.8)] transition-all duration-700 ease-out rounded-full"
             style={{
               height: activeIndex === -1 ? '0%' : `${((activeIndex + 1) / timeline.length) * 100}%`
             }}
@@ -82,7 +82,7 @@ export default function Experience() {
                   onMouseEnter={() => setActiveIndex(idx)}
                 >
                   {/* Station Node */}
-                  <div className="absolute left-[-4px] md:left-[44px] top-0 z-10">
+                  <div className="absolute left-[-2px] md:left-[44px] top-0 z-10">
                     <div
                       className={`w-3 h-3 rounded-full border-2 transition-all duration-500 ${isActive
                         ? 'bg-emerald-500 border-emerald-500 shadow-[0_0_20px_rgba(16,185,129,1)] scale-150'
@@ -92,7 +92,7 @@ export default function Experience() {
                   </div>
 
                   {/* Content Card */}
-                  <div className="md:ml-24 flex-1">
+                  <div className="ml-8 md:ml-24 flex-1">
                     <div
                       className={`relative p-6 rounded-2xl border transition-all duration-500 ${isActive
                         ? 'bg-white dark:bg-gray-900 border-emerald-500/50 shadow-[0_0_30px_-10px_rgba(16,185,129,0.3)]'

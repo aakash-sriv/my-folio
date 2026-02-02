@@ -4,26 +4,36 @@ export default function Projects() {
   const projects = [
     {
       id: 1,
-      title: 'PrepPerfect',
-      description: 'AI-powered interview preparation platform that generates role-specific questions, provides detailed explanations, and helps you master your next interview.',
-      image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80',
-      tags: ['React', 'Vite', 'Tailwind', 'Framer Motion'],
-      github: 'https://github.com/aakash-sriv/PrepPerfect',
-      live: 'https://prep-perfect.vercel.app',
-      featured: true
-    },
-    {
-      id: 2,
       title: 'SmartSpend',
       description: 'An AI-powered financial management platform that helps you track, analyze, and optimize your spending with real-time insights and intelligent automation.',
-      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80',
+      image: 'https://smart-spend-ak.vercel.app/og-image.png',
       tags: ['Next.js', 'Tailwind', 'Prisma', 'Gemini AI'],
       github: 'https://github.com/aakash-sriv/SmartSpend',
       live: 'https://smart-spend-ak.vercel.app/',
       featured: true
     },
     {
+      id: 2,
+      title: 'Chatbot Platform',
+      description: 'A full-stack chatbot platform with real-time messaging, AI-powered responses, and a sleek modern interface for seamless conversations.',
+      image: 'https://yellow-chatbot-orpin.vercel.app/og-image.png',
+      tags: ['React', 'Node.js', 'Express', 'Gemini AI'],
+      github: 'https://github.com/aakash-sriv',
+      live: 'https://yellow-chatbot-orpin.vercel.app/',
+      featured: true
+    },
+    {
       id: 3,
+      title: 'PrepPerfect',
+      description: 'AI-powered interview preparation platform that generates role-specific questions, provides detailed explanations, and helps you master your next interview.',
+      image: 'https://prep-perfect.vercel.app/og-image.png',
+      tags: ['React', 'Vite', 'Tailwind', 'Framer Motion'],
+      github: 'https://github.com/aakash-sriv/PrepPerfect',
+      live: 'https://prep-perfect.vercel.app',
+      featured: true
+    },
+    {
+      id: 4,
       title: 'Coming Soon',
       description: 'Something exciting is in the works! A new project that pushes the boundaries of what is possible on the web. Stay tuned for updates.',
       image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80',
@@ -36,15 +46,15 @@ export default function Projects() {
   ];
 
   return (
-    <section id="projects" className="min-h-screen py-4 px-6 sm:px-6 lg:px-8">
+    <section id="projects" className="py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-3xl sm:text-5xl font-bold text-black dark:text-white mb-4">
             Featured Projects
           </h2>
-          <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full mb-6"></div>
+          <div className="w-20 h-1 accent-gradient dark:accent-gradient-dark mx-auto rounded-full mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400 text-lg max-w-2xl mx-auto">
             A collection of projects showcasing my skills in web development, problem-solving, and creative design.
           </p>
@@ -88,23 +98,23 @@ export default function Projects() {
               </div>
 
               {/* Project Info */}
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 {/* Title */}
-                <h3 className="text-xl font-bold text-black dark:text-white mb-2 group-hover:text-[#79b072] dark:group-hover:text-[#0a8a3f] transition-colors">
+                <h3 className="text-lg sm:text-xl font-bold text-black dark:text-white mb-2 group-hover:text-[#79b072] dark:group-hover:text-[#0a8a3f] transition-colors">
                   {project.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 sm:mb-4 line-clamp-3 break-words">
                   {project.description}
                 </p>
 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                   {project.tags.map((tag, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full"
+                      className="px-2 sm:px-3 py-0.5 sm:py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs font-medium rounded-full"
                     >
                       {tag}
                     </span>
@@ -113,23 +123,23 @@ export default function Projects() {
 
                 {/* Links */}
                 {!project.isComingSoon && (
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-sm font-medium"
+                      className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors text-xs sm:text-sm font-medium"
                     >
-                      <Github size={16} />
+                      <Github size={14} />
                       Code
                     </a>
                     <a
                       href={project.live}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-4 py-2 accent-gradient dark:accent-gradient-dark text-white rounded-lg hover:opacity-90 transition-opacity text-sm font-medium"
+                      className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 accent-gradient dark:accent-gradient-dark text-white rounded-lg hover:opacity-90 transition-opacity text-xs sm:text-sm font-medium"
                     >
-                      <ExternalLink size={16} />
+                      <ExternalLink size={14} />
                       Live Demo
                     </a>
                   </div>
